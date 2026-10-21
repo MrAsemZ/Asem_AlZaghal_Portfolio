@@ -98,6 +98,33 @@
     }
 }
 
+/* scroll progress line: sits on the navbar's bottom border, width is set by scroll-progress.js */
+.scroll-progress{
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    width: calc(var(--progress, 0) * 100%);
+    height: 2px;
+    background-color: var(--accent);
+    box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 60%, transparent);
+    pointer-events: none;
+}
+
+/* glowing dot at the tip, hidden until you start scrolling */
+.scroll-progress::after{
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: -4px;
+    width: 8px;
+    height: 8px;
+    margin-top: -4px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    box-shadow: 0 0 10px 2px color-mix(in srgb, var(--accent) 65%, transparent);
+    opacity: min(1, calc(var(--progress, 0) * 40));
+}
+
 /* the logo already goes home, so "Home" makes room for the other links on small screens */
 @media (max-width: 600px){
     #nav-links li:first-child{
