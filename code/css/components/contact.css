@@ -1,0 +1,129 @@
+/* CONTACT */
+
+.contact-line{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.9rem;
+}
+
+.contact-line + .contact-line{
+    margin-top: 0.75rem;
+}
+
+.contact-email{
+    font-family: var(--font-sans);
+    font-size: clamp(1.5rem, 1.8vw + 1rem, 2.8rem);
+    font-weight: 700;
+    color: var(--text);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-email:hover{
+    color: var(--accent);
+}
+
+.contact-phone{
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--dim);
+    text-decoration: none;
+}
+
+/* ---------- typewriter: JS measures the text, CSS types it ---------- */
+
+.typewriter{
+    display: inline-block;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    vertical-align: bottom;
+    border-right: 3px solid transparent;
+}
+
+.typewriter.is-armed{
+    width: 0;
+}
+
+.typewriter.is-typing{
+    animation:
+        type 1.4s steps(var(--chars), end) forwards,
+        caret 0.8s step-end infinite;
+}
+
+.typewriter.is-done{
+    width: auto;
+    animation: none;
+}
+
+/* ---------- copy button ---------- */
+
+.copy-btn{
+    padding: 0.25rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background: transparent;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--dim);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.copy-btn:hover,
+.copy-btn.is-copied{
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ---------- socials and résumé ---------- */
+
+.contact-socials{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-link{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--dim);
+    text-decoration: none;
+}
+
+.social-link svg{
+    width: 16px;
+    height: 16px;
+}
+
+.resume-btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.5rem;
+    padding: 0.7rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.resume-btn:hover{
+    border-color: var(--accent);
+    background-color: var(--accent);
+    color: var(--bg);
+}
+
+.resume-btn:hover svg{
+    animation: arrow-bob 0.8s ease-in-out infinite;
+}

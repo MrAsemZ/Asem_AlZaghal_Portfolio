@@ -1,0 +1,28 @@
+/* ABOUT */
+
+#about-grid{
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    gap: 3rem;
+    align-items: start;
+}
+
+#about-text{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#about-desc-1,
+#about-desc-2 {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--dim);
+}
+
+@media (max-width: 820px){
+    #about-grid{
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+}

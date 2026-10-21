@@ -1,0 +1,96 @@
+/* HERO */
+
+#home{
+    padding-top: 100px;
+    overflow-x: clip; /* flying shards stop at the screen edge */
+}
+
+#home-card{
+    width: 100%;
+    border-radius: 12px;
+    border: 1px solid var(--hairline);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding:3rem 2rem;
+    gap: 1.1rem;
+
+    background-color: var(--panel);
+}
+
+#home-buttons{
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#hero-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent);
+}
+
+#hero-title {
+    font-family: var(--font-sans);
+    font-size: clamp(1.8rem, 5.2vw, 3rem);
+    font-weight: 700;
+    color: var(--text);
+}
+
+#hero-desc {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: var(--dim);
+    max-width: 52ch;
+}
+
+#btn-work,
+#btn-contact {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 7px;
+    text-decoration: none;
+    padding: 0.7rem 1.3rem;
+
+    transition: 0.2s ease;
+}
+
+#btn-work{
+    background: var(--accent);
+    color: var(--bg);
+    border: 1px solid var(--accent);
+
+    background-color: var(--accent);
+}
+
+#btn-contact{
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+#btn-work:hover {
+    background: transparent;
+    border-color: var(--border);
+    color: var(--text);
+}
+
+#btn-contact:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--bg);
+}
+
+@media (max-width: 600px){
+    #home-card{
+        padding: 2rem 1.25rem;
+    }
+}
+
+@media (max-width: 600px) {
+    #home {
+        padding-top: 80px;
+    }
+}

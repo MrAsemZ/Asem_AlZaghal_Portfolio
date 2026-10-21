@@ -1,0 +1,33 @@
+/* TOKENS */
+
+:root{
+    /* colors */
+    --bg: #0c0d10;
+    --panel: #15171c;
+    --editor: #1a1c22;
+    --editor-bar: #22242b;
+    --text: #e9e9ee;
+    --dim: #9a9ea8;
+    --muted: #5c6270;
+    --accent: #c8ff4d;
+    --accent-dim: #8fb838;
+    --border: #262a34;
+    --hairline: #232630;
+    --route: #3a4152;
+    --amber: #ffb454;
+
+    /* code syntax colors */
+    --syntax-tag: #6fb1ff;
+    --syntax-attr: #c8ff4d;
+    --syntax-string: #ffb454;
+    --syntax-keyword: #ff7fb0;
+
+    /* fonts */
+    --font-sans: "Space Grotesk", sans-serif;
+    --font-mono: "JetBrains Mono", monospace;
+
+    /* motion */
+    --ease: cubic-bezier(0.15, 0.8, 0.25, 1);
+    --ease-burst: cubic-bezier(0.3, 0.6, 0.25, 1); /* explosive start, soft landing */
+    --shatter-time: 0.6s;
+}

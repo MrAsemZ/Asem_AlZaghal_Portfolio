@@ -1,0 +1,204 @@
+/* SHATTER */
+
+.shatter{
+    position: relative;
+    border-radius: 12px;
+}
+
+/* ---------- code pane: covers the real content until it breaks ---------- */
+
+.shatter-code{
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--hairline);
+    border-radius: inherit;
+    background-color: var(--editor);
+}
+
+/* without JS there is nothing to click, so the code pane stays out of the way */
+.shatter:not(.is-ready) .shatter-code{
+    display: none;
+}
+
+.shatter-bar{
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.9rem;
+    border-bottom: 1px solid var(--border);
+    background-color: var(--editor-bar);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--dim);
+    transition: opacity 0.3s ease;
+}
+
+.dot{
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+.dot.r{ background-color: #ff5f57; }
+.dot.y{ background-color: #febc2e; }
+.dot.g{ background-color: #28c840; }
+
+.shatter-file{ margin-left: 0.5rem; }
+
+.shatter-hint{
+    margin-left: auto;
+    font-size: 0.72rem;
+    color: var(--accent-dim);
+}
+
+.shatter-body{
+    flex: 1;
+    margin: 0;
+    padding: 1.1rem 1.3rem;
+    overflow: hidden;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.75;
+    color: var(--dim);
+    transition: opacity 0.3s ease;
+}
+
+.syn-ln{
+    display: inline-block;
+    width: 1.5rem;
+    color: var(--muted);
+    user-select: none;
+}
+.syn-tag{ color: var(--syntax-tag); }
+.syn-attr{ color: var(--syntax-attr); }
+.syn-str{ color: var(--syntax-string); }
+.syn-com{ color: var(--muted); font-style: italic; }
+
+/* invisible button over the whole pane: keyboard-focusable, click target */
+.shatter-trigger{
+    position: absolute;
+    inset: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}
+
+.shatter-trigger:focus-visible{
+    outline-offset: -4px;
+}
+
+/* ---------- shards: built by shatter.js, one triangle each ---------- */
+
+.shatter-shards{
+    position: absolute;
+    inset: 0;
+    z-index: 6;
+    pointer-events: none;
+}
+
+.shatter-shard{
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--w);
+    height: var(--h);
+    clip-path: var(--clip);
+    transform-origin: var(--ox) var(--oy);
+}
+
+/* ---------- flash at the point of impact ---------- */
+
+.shatter::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 7;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(
+        circle at var(--impact-x, 50%) var(--impact-y, 50%),
+        rgba(255, 255, 255, 0.7),
+        color-mix(in srgb, var(--accent) 25%, transparent) 25%,
+        transparent 60%
+    );
+}
+
+/* ---------- broken state: JS only adds .is-broken, CSS does the rest ---------- */
+
+.shatter.is-broken{
+    animation: impact-shake 0.25s ease-out;
+}
+
+.shatter.is-broken::after{
+    animation: impact-flash 0.35s ease-out;
+}
+
+.shatter.is-broken .shatter-code{
+    border-color: transparent;
+    background-color: transparent;
+    pointer-events: none;
+}
+
+.shatter.is-broken .shatter-bar,
+.shatter.is-broken .shatter-body{
+    opacity: 0;
+    transition-duration: 0.08s;
+}
+
+/* transitions live only here, so restoring the code snaps back instantly */
+.shatter.is-broken .shatter-shard{
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent 55%),
+        var(--editor);
+    opacity: 0;
+    transform: translate(var(--tx), var(--ty)) rotate(var(--rot)) scale(0.5);
+    transition:
+        transform var(--shatter-time) var(--ease-burst) var(--d),
+        opacity 0.3s ease-in calc(var(--d) + 0.25s);
+    will-change: transform, opacity;
+}
+
+/* ---------- "show code" button ---------- */
+
+.shatter-reset{
+    position: absolute;
+    top: 0.85rem;
+    right: 0.85rem;
+    z-index: 8;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    background-color: var(--panel);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--dim);
+    cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.shatter.is-broken .shatter-reset{
+    visibility: visible;
+    opacity: 1;
+    transition:
+        opacity 0.3s ease 0.5s,
+        visibility 0s linear 0.5s,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.shatter-reset:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+@media (max-width: 600px){
+    .shatter-body{
+        padding: 1rem;
+        font-size: 0.68rem;
+    }
+}

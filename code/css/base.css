@@ -1,0 +1,68 @@
+/* BASE */
+
+*{
+    box-sizing: border-box; /*to ensure all are the same*/
+        scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    color: var(--text);
+    background-color: var(--bg);
+}
+
+ul{
+    list-style: none;
+}
+
+.section{
+    padding: 4.5rem 0;
+}
+
+.wrap{
+    width: 100%;
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+}
+
+.section-label {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-dim);
+}
+
+.secondary-title{
+    font-family: var(--font-sans);
+    font-size: clamp(1.6rem, 3vw + 1rem, 2.3rem);
+    font-weight: 700;
+    color: var(--text);
+
+}
+
+@media (max-width: 600px){
+    .section{
+        padding: 3rem 0;
+    }
+}
+
+:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
+/* underline that draws itself from the left on hover */
+.link-underline{
+    padding-bottom: 2px;
+    background-image: linear-gradient(var(--accent), var(--accent));
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    background-size: 0% 1px;
+    transition: background-size 0.3s ease, color 0.2s ease;
+}
+
+.link-underline:hover{
+    background-size: 100% 1px;
+    color: var(--text);
+}

@@ -1,0 +1,182 @@
+/* SKILLS TREE */
+
+#skills-tree-wrap{
+    margin-top: 2rem;
+    padding: 2rem;
+    overflow-x: auto; /* the tree scrolls sideways on small screens instead of breaking the layout */
+    border: 1px solid var(--hairline);
+    border-radius: 14px;
+    background-color: var(--panel);
+}
+
+#skills-hint{
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+/* ---------- stage: the lines, the nodes and the walking dot share one coordinate space ---------- */
+
+.tree-stage{
+    position: relative;
+    width: max-content;
+}
+
+.tree-lines{
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    pointer-events: none;
+}
+
+/* pipes are drawn by skills-walker.js in three stacked layers: wall, channel, glowing fill */
+.tree-pipe-wall,
+.tree-pipe-channel,
+.tree-pipe-fill{
+    fill: none;
+    stroke-linecap: round;
+}
+
+.tree-pipe-wall{
+    stroke: var(--route);
+    stroke-width: 10;
+}
+
+.tree-pipe-channel{
+    stroke: var(--bg);
+    stroke-width: 6;
+}
+
+.tree-pipe-fill{
+    stroke: var(--accent);
+    stroke-width: 3.5;
+    filter: drop-shadow(0 0 4px color-mix(in srgb, var(--accent) 70%, transparent));
+}
+
+.tree-lines .is-hidden{
+    display: none;
+}
+
+.tree-dot{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: var(--accent);
+    transform: translate(calc(var(--x, 0) * 1px - 50%), calc(var(--y, 0) * 1px - 50%));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.tree-stage.is-walking .tree-dot{
+    opacity: 1;
+    animation: dot-pulse 0.9s ease-in-out infinite;
+}
+
+/* ---------- layout ---------- */
+
+.tree,
+.tree ul{
+    margin: 0;
+    padding: 0;
+}
+
+.tree{
+    --tree-gap: 3.4rem;   /* room for the curved lines between a node and its children */
+    position: relative;
+    z-index: 1;           /* nodes sit above the lines */
+}
+
+.tree li{
+    display: flex;
+    align-items: center;
+}
+
+.tree ul{
+    display: flex;
+    flex-direction: column;
+    margin-left: var(--tree-gap);
+}
+
+.tree ul > li{
+    padding: 0.35rem 0;
+}
+
+/* ---------- nodes: locked until the dot arrives ---------- */
+
+.node{
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    padding: 0.45rem 0.8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background-color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    white-space: nowrap;
+    color: var(--muted);
+    transition: color 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+}
+
+/* the socket: hollow while locked, filled once unlocked */
+.node::before{
+    content: "";
+    width: 8px;
+    height: 8px;
+    border: 1.5px solid var(--route);
+    border-radius: 50%;
+    transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.node.is-lit{
+    border-color: var(--accent-dim);
+    background-color: color-mix(in srgb, var(--accent) 8%, var(--bg));
+    color: var(--text);
+    animation: node-unlock 0.5s var(--ease);
+}
+
+.node.is-lit::before{
+    border-color: var(--accent);
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+}
+
+.node-root.is-lit{
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+/* ---------- branches: click to collapse ---------- */
+
+.node-branch{
+    cursor: pointer;
+}
+
+.node-branch::after{
+    content: "−";
+    margin-left: 0.2rem;
+    color: var(--accent-dim);
+}
+
+.tree li.collapsed > .node-branch::after{
+    content: "+";
+}
+
+.node-branch:hover,
+.node-branch:focus-visible{
+    border-color: var(--accent);
+    color: var(--text);
+    outline: none;
+}
+
+.tree li.collapsed > ul{
+    display: none;
+}

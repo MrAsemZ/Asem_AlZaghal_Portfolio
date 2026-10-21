@@ -1,0 +1,180 @@
+/* JOURNEY MAP */
+
+.route{
+       position:absolute;
+       inset:0;/* ITS EQUAT TO TOP, BOTTOM, LEFT, RIGHT = 0;**/
+       width:100%;
+       height:100%;
+    }
+
+.route path{
+    fill:none;/*TO REMOVE THE BACKGROUND*/
+    stroke:var(--route); /*OUTLINE COLOR*/
+    stroke-width:.6; /*OUTLINE WIDTH*/
+    stroke-dasharray:2.2 2.4; /*LINE LENGTH 2.2*** GAPS 2.4*/
+    stroke-linecap:round;/*SIMILAR TO BORDER-RADIUS*/
+}
+
+#journey-map{
+    width: 100%;
+    aspect-ratio: 16/11;
+    border-radius: 14px;
+    border: 1px solid var(--hairline);
+
+    background-color: var(--panel);
+
+    position: relative;
+}
+
+/*size is : viewBox="0 0 100 68"*/
+#journey-container-1{
+    left: 8%;
+    top: 77%;
+}
+
+#journey-container-2{
+    left: 44%;
+    top: 53%;
+}
+
+#journey-container-3{
+    left: 89%;
+    top: 26%;
+}
+
+.stop{
+    position: absolute;
+    z-index: 3;
+}
+
+/* hide the radio but keep it in the DOM so :checked still works */
+.stop input[type="radio"]{
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+}
+
+.pin{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: var(--panel);
+    border: 1.5px solid var(--accent);
+    color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    position: relative;
+    z-index: 2;
+    transition: background 0.18s ease, color 0.18s ease;
+}
+
+.pin:hover{
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* selected pin stays filled */
+.stop input[type="radio"]:checked ~ .pin{
+    background: var(--accent);
+    color: var(--bg);
+}
+
+/* pulsing ring that invites a click; the open pin stays calm */
+.pin::after{
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--accent);
+    border-radius: 50%;
+    opacity: 0.35;
+    pointer-events: none;
+    animation: pin-pulse 2.4s ease-out infinite;
+}
+
+.stop input[type="radio"]:checked ~ .pin::after{
+    animation: none;
+    opacity: 0;
+}
+
+.card{
+    position: absolute;
+    bottom: calc(100% + 14px);   /* sits above the pin, with a 14px gap */
+    left: 50%;
+    transform: translate(-50%, 6px);  /* centered horizontally, nudged down 6px */
+    width: 215px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.9rem 1rem;
+    z-index: 5;
+
+    opacity: 0;
+    pointer-events: none;   /* a hidden card must not block clicks on pins behind it */
+    transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+/* the little triangle pointing down at the pin */
+.card::after{/*::after- adds new content in card that does not exit in html*/
+    content: "";/*nessisary for ::after to work*/
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);/*move on x*/
+    border: 6px solid transparent;
+    border-top-color: var(--panel);
+}
+
+/* reveal: fade in and slide up into place */
+.stop input[type="radio"]:checked ~ .card{
+    pointer-events: auto;
+    opacity: 1;
+    transform: translate(-50%, 0);/*move left to its 50% width,, 0 move vertical*/
+}
+
+/* selected stop floats above the others */
+.stop:has(input[type="radio"]:checked){
+    z-index: 20;
+}
+
+/*card content*/
+.card-title{
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--accent);
+    margin: 0 0 0.35rem;
+}
+
+.card-subtitle{
+    font-family: var(--font-sans);
+    font-size: 0.93rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 0.35rem;
+}
+
+.card-desc{
+    font-family: var(--font-sans);
+    font-size: 0.79rem;
+    line-height: 1.5;
+    color: var(--dim);
+    margin: 0;
+}
+
+@media (max-width: 600px) {
+    .card{
+        width: 160px;
+    }
+    #journey-container-1 .card{
+        left: 0;
+        transform: translate(0, 0);
+    }
+    #journey-container-3 .card{
+        left: auto;
+        right: 0;
+        transform: translate(0, 0);
+    }
+}

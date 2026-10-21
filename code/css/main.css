@@ -1,0 +1,16 @@
+/* MAIN: only imports, order matters (later files win ties) */
+
+@import "tokens.css";
+@import "base.css";
+
+@import "components/nav.css";
+@import "components/hero.css";
+@import "components/shatter.css";
+@import "components/about.css";
+@import "components/journey-map.css";
+@import "components/skills-tree.css";
+@import "components/projects.css";
+@import "components/contact.css";
+@import "components/footer.css";
+
+@import "motion.css";
