@@ -34,7 +34,7 @@
 
 #journey-container-2{
     left: 44%;
-    top: 53%;
+    top: 40%;
 }
 
 #journey-container-3{
@@ -162,34 +162,6 @@
     line-height: 1.5;
     color: var(--dim);
     margin: 0;
-}
-
-/* first and last cards sit flush with the map's edges so they never spill off screen */
-#journey-container-1 .card{
-    left: 0;
-    transform: translate(0, 6px);
-}
-
-#journey-container-3 .card{
-    left: auto;
-    right: 0;
-    transform: translate(0, 6px);
-}
-
-#journey-container-1 .card::after{
-    left: 9px;
-    transform: none;
-}
-
-#journey-container-3 .card::after{
-    left: auto;
-    right: 9px;
-    transform: none;
-}
-
-#journey-container-1 input[type="radio"]:checked ~ .card,
-#journey-container-3 input[type="radio"]:checked ~ .card{
-    transform: translate(0, 0);
 }
 
 @media (max-width: 600px) {
