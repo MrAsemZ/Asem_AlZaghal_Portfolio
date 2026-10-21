@@ -44,6 +44,11 @@
     50%{ transform: translateY(3px); }
 }
 
+@keyframes service-open{
+    from{ opacity: 0; transform: translateY(-8px); }
+    to{ opacity: 1; transform: none; }
+}
+
 @keyframes type{
     to{ width: var(--text-width); }
 }

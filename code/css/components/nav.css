@@ -74,6 +74,9 @@
         gap: 1rem;
     }
 
+    #nav-links a{
+        font-size: 0.78rem;
+    }
 }
 
 @media (max-width: 500px) {
@@ -81,8 +84,9 @@
         font-size: 0.8rem;
     }
 
+    /* only "A'sem" is shown on small phones so six links still fit */
     #logo-part {
-        font-size: 0.8rem;
+        display: none;
     }
 
     #nav-links {
@@ -91,5 +95,12 @@
 
     #nav-links a {
         font-size: 0.66rem;
+    }
+}
+
+/* the logo already goes home, so "Home" makes room for the other links on small screens */
+@media (max-width: 600px){
+    #nav-links li:first-child{
+        display: none;
     }
 }

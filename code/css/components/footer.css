@@ -1,15 +1,5 @@
 /* FOOTER */
 
-#footer-link {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--dim);
-}
-
-#footer-link:hover {
-    color: var(--accent);
-}
-
 #footer-wrap{
     display: flex;
     flex-direction: row;

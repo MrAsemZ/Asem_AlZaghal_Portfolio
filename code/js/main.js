@@ -5,6 +5,7 @@ import { initSkillsWalker } from "./modules/skills-walker.js";
 import { initProjectCards } from "./modules/project-cards.js";
 import { initTypewriter } from "./modules/typewriter.js";
 import { initCopyButtons } from "./modules/copy-buttons.js";
+import { initBackToTop } from "./modules/back-to-top.js";
 
 // CSS hides [data-reveal] items only when this class exists, so a failed script never leaves them invisible
 document.documentElement.classList.add("js");
@@ -16,3 +17,4 @@ initSkillsWalker();
 initProjectCards();
 initTypewriter();
 initCopyButtons();
+initBackToTop();
