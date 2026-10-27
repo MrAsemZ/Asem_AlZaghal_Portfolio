@@ -92,7 +92,7 @@
     border-radius: 50%;
     opacity: 0.35;
     pointer-events: none;
-    animation: pin-pulse 2.4s ease-out infinite;
+    animation: pin-pulse 2s ease-out infinite;
 }
 
 .stop input[type="radio"]:checked ~ .pin::after{
@@ -163,6 +163,7 @@
     color: var(--dim);
     margin: 0;
 }
+
 
 @media (max-width: 600px) {
     .card{

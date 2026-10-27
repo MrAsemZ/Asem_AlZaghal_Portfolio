@@ -8,6 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
 
+    <script>
+        // runs before the page paints, so a saved accent never flashes the default color first
+        try {
+            const saved = localStorage.getItem("accent");
+            if (["lime", "cyan", "violet", "orange", "pink"].includes(saved)) document.documentElement.dataset.accent = saved;
+        } catch {}
+    </script>
     <link rel="stylesheet" href="code/css/main.css">
     <script type="module" src="code/js/main.js"></script>
     <title>A'sem Al-Zaghal -- Portfolio</title>
@@ -141,45 +148,45 @@
             <h2 class="secondary-title">Four projects I’ve built end to end.</h2>
 
             <div class="project-grid">
-                <a class="project-card project-card--featured" data-reveal href="https://ai-rasin.com/" target="_blank" rel="noopener noreferrer">
+                <article class="project-card project-card--featured" data-reveal data-case="rasin">
                     <span class="project-status" data-status="progress">in progress</span>
-                    <h3 class="project-name">Rasin</h3>
+                    <h3 class="project-name"><button type="button" class="project-open">Rasin</button></h3>
                     <p class="project-description">AI bookkeeper for small businesses, categorizing and tax filing, with every AI decision shown and reversible.</p>
                     <ul class="project-stack">
                         <li>SaaS</li><li>AI</li><li>double-entry</li>
                     </ul>
-                    <span class="project-arrow" aria-hidden="true">↗</span>
-                </a>
+                    <span class="project-arrow" aria-hidden="true">case study →</span>
+                </article>
 
-                <a class="project-card" data-reveal href="https://boutique-xi-nine.vercel.app/" target="_blank" rel="noopener noreferrer">
+                <article class="project-card" data-reveal data-case="boutique">
                     <span class="project-status" data-status="live">live</span>
-                    <h3 class="project-name">Boutique</h3>
+                    <h3 class="project-name"><button type="button" class="project-open">Boutique</button></h3>
                     <p class="project-description">Multi-vendor clothing marketplace, vendor onboarding, catalog, orders, and payments.</p>
                     <ul class="project-stack">
                         <li>Laravel</li><li>React</li><li>React Native</li><li>Claude Code</li>
                     </ul>
-                    <span class="project-arrow" aria-hidden="true">↗</span>
-                </a>
+                    <span class="project-arrow" aria-hidden="true">case study →</span>
+                </article>
 
-                <a class="project-card" data-reveal href="https://github.com/MrAsemZ/WISE-Guide.git" target="_blank" rel="noopener noreferrer">
+                <article class="project-card" data-reveal data-case="wise">
                     <span class="project-status" data-status="shipped">shipped</span>
-                    <h3 class="project-name">WISE Guide</h3>
+                    <h3 class="project-name"><button type="button" class="project-open">WISE Guide</button></h3>
                     <p class="project-description">Campus assistant app helping students navigate schedules, buildings, and university services.</p>
                     <ul class="project-stack">
                         <li>Flutter</li><li>Chatbot</li><li>Graduation project</li>
                     </ul>
-                    <span class="project-arrow" aria-hidden="true">↗</span>
-                </a>
+                    <span class="project-arrow" aria-hidden="true">case study →</span>
+                </article>
 
-                <a class="project-card" data-reveal href="https://github.com/MrAsemZ/WMS.git" target="_blank" rel="noopener noreferrer">
+                <article class="project-card" data-reveal data-case="wms">
                     <span class="project-status" data-status="shipped">shipped</span>
-                    <h3 class="project-name">WMS</h3>
+                    <h3 class="project-name"><button type="button" class="project-open">WMS</button></h3>
                     <p class="project-description">Warehouse Management System that manages warehouses, stock levels, item importing and exporting, and multiple storages.</p>
                     <ul class="project-stack">
                         <li>PHP</li>
                     </ul>
-                    <span class="project-arrow" aria-hidden="true">↗</span>
-                </a>
+                    <span class="project-arrow" aria-hidden="true">case study →</span>
+                </article>
             </div>
         </div>
     </section>
@@ -292,11 +299,32 @@
     <footer id="footer">
         <div id="footer-wrap">
         <p class="footer-content">&lt;!-- Portfolio by A'sem Al-Zaghal &copy; --&gt;</p>
+        <div class="theme-picker" role="group" aria-label="Accent color">
+            <span class="theme-label">//theme</span>
+            <button type="button" class="theme-swatch" data-accent="lime" aria-label="Lime" aria-pressed="true"></button>
+            <button type="button" class="theme-swatch" data-accent="cyan" aria-label="Cyan" aria-pressed="false"></button>
+            <button type="button" class="theme-swatch" data-accent="violet" aria-label="Violet" aria-pressed="false"></button>
+            <button type="button" class="theme-swatch" data-accent="orange" aria-label="Orange" aria-pressed="false"></button>
+            <button type="button" class="theme-swatch" data-accent="pink" aria-label="Pink" aria-pressed="false"></button>
+        </div>
         <a class="to-top" href="#home"><span class="to-top-arrow" aria-hidden="true">↑</span> Back to top</a>
         </div>
     </footer>
 
     <a class="to-top-float" href="#home" aria-label="Back to top">↑</a>
+
+    <dialog class="case" aria-labelledby="case-title">
+        <div class="case-inner">
+            <button type="button" class="case-close" aria-label="Close case study">✕</button>
+            <span class="project-status case-status"></span>
+            <h3 class="case-title" id="case-title"></h3>
+            <p class="case-summary"></p>
+            <div class="case-sections"></div>
+            <ul class="project-stack case-stack"></ul>
+            <a class="case-link" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+    </dialog>
+
 <!------------------------------------------>
 <!----This Portfolio was designed & made---->
 <!------------by A'sem Al-Zaghal------------>

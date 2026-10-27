@@ -1,5 +1,16 @@
 /* TOKENS */
 
+/* registering --accent as a <color> lets the browser fade between themes instead of snapping */
+@property --accent{
+    syntax: "<color>";
+    inherits: true;
+    initial-value: #c8ff4d;
+}
+
+html{
+    transition: --accent 0.35s ease;
+}
+
 :root{
     /* colors */
     --bg: #0c0d10;
@@ -9,8 +20,15 @@
     --text: #e9e9ee;
     --dim: #9a9ea8;
     --muted: #5c6270;
-    --accent: #c8ff4d;
-    --accent-dim: #8fb838;
+    /* accent palette: the theme picker swaps which one --accent points to */
+    --accent-lime: #c8ff4d;
+    --accent-cyan: #3ee6ff;
+    --accent-violet: #a78bfa;
+    --accent-orange: #ff9f43;
+    --accent-pink: #ff6fb1;
+
+    --accent: var(--accent-lime);
+    --accent-dim: color-mix(in srgb, var(--accent) 72%, black);
     --border: #262a34;
     --hairline: #232630;
     --route: #3a4152;
@@ -31,3 +49,9 @@
     --ease-burst: cubic-bezier(0.3, 0.6, 0.25, 1); /* explosive start, soft landing */
     --shatter-time: 0.6s;
 }
+
+/* themes: theme-picker.js sets data-accent on <html> */
+html[data-accent="cyan"]{ --accent: var(--accent-cyan); }
+html[data-accent="violet"]{ --accent: var(--accent-violet); }
+html[data-accent="orange"]{ --accent: var(--accent-orange); }
+html[data-accent="pink"]{ --accent: var(--accent-pink); }

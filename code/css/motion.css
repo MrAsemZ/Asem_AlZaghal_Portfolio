@@ -44,6 +44,26 @@
     50%{ transform: translateY(3px); }
 }
 
+@keyframes case-in{
+    from{ transform: translateX(100%); }
+    to{ transform: none; }
+}
+
+@keyframes case-out{
+    from{ transform: none; }
+    to{ transform: translateX(100%); }
+}
+
+@keyframes fade-in{
+    from{ opacity: 0; }
+    to{ opacity: 1; }
+}
+
+@keyframes fade-out{
+    from{ opacity: 1; }
+    to{ opacity: 0; }
+}
+
 @keyframes service-open{
     from{ opacity: 0; transform: translateY(-8px); }
     to{ opacity: 1; transform: none; }

@@ -18,7 +18,7 @@
     border-radius: 12px;
     background-color: var(--panel);
     color: inherit;
-    text-decoration: none;
+    isolation: isolate; /* keeps the glow behind the text */
     transition: border-color 0.25s ease;
 }
 
@@ -34,6 +34,7 @@
     position: absolute;
     inset: 0;
     opacity: 0;
+    z-index: -1;
     pointer-events: none;
     background: radial-gradient(
         320px circle at var(--mx, 50%) var(--my, 50%),
@@ -43,12 +44,8 @@
     transition: opacity 0.3s ease;
 }
 
-.project-card > *{
-    position: relative;
-}
-
 .project-card:hover,
-.project-card:focus-visible{
+.project-card:has(.project-open:focus-visible){
     border-color: var(--accent);
 }
 
@@ -106,6 +103,32 @@
     color: var(--text);
 }
 
+/* the title is a real button; its ::after stretches over the whole card, so the whole card opens the case study */
+.project-open{
+    padding: 0;
+    border: 0;
+    background: none;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+}
+
+.project-open::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+}
+
+.project-open:focus-visible{
+    outline: none;
+}
+
+.project-card:has(.project-open:focus-visible){
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+}
+
 .project-description{
     max-width: 60ch;
     margin: 0;
@@ -139,16 +162,16 @@
 
 .project-arrow{
     position: absolute;
-    top: 1.4rem;
+    top: 1.5rem;
     right: 1.5rem;
     font-family: var(--font-mono);
-    font-size: 1.1rem;
+    font-size: 0.72rem;
     color: var(--muted);
     transition: transform 0.25s var(--ease), color 0.25s ease;
 }
 
 .project-card:hover .project-arrow{
-    transform: translate(3px, -3px);
+    transform: translateX(4px);
     color: var(--accent);
 }
 

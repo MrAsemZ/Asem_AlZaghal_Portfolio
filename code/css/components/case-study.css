@@ -1,0 +1,155 @@
+/* CASE STUDY PANEL */
+
+/* the page behind the panel stops scrolling while it is open */
+html:has(.case[open]){
+    overflow: hidden;
+}
+
+.case{
+    position: fixed;
+    inset: 0 0 0 auto;
+    width: min(520px, 100vw);
+    height: 100dvh;
+    max-height: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    border: 0;
+    border-left: 1px solid var(--border);
+    background-color: var(--panel);
+    color: var(--text);
+}
+
+.case[open]{
+    animation: case-in 0.4s var(--ease);
+}
+
+.case[open]::backdrop{
+    background-color: rgb(0 0 0 / 0.6);
+    backdrop-filter: blur(3px);
+    animation: fade-in 0.3s ease;
+}
+
+.case.is-closing{
+    animation: case-out 0.25s ease-in forwards;
+}
+
+.case.is-closing::backdrop{
+    background-color: rgb(0 0 0 / 0.6);
+    animation: fade-out 0.25s ease-in forwards;
+}
+
+.case-inner{
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding: 1.25rem 1.75rem 3rem;
+}
+
+.case-close{
+    position: sticky;
+    top: 0.5rem;
+    z-index: 1;
+    align-self: flex-end;
+    width: 36px;
+    height: 36px;
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    background-color: var(--panel);
+    font-size: 0.95rem;
+    color: var(--dim);
+    cursor: pointer;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.case-close:hover{
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.case-status{
+    align-self: flex-start;
+}
+
+.case-title{
+    margin: 0;
+    font-size: clamp(1.7rem, 3vw + 1rem, 2.3rem);
+    line-height: 1.15;
+}
+
+.case-summary{
+    margin: 0;
+    line-height: 1.6;
+    color: var(--dim);
+}
+
+.case-sections{
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+}
+
+.case-label{
+    margin: 0 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--accent-dim);
+}
+
+.case-section p,
+.case-list li{
+    margin: 0;
+    line-height: 1.7;
+    color: var(--dim);
+}
+
+.case-list{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+}
+
+.case-list li{
+    position: relative;
+    padding-left: 1.2rem;
+}
+
+.case-list li::before{
+    content: "›";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+}
+
+/* placeholder text stands out until you replace it */
+.case .is-todo{
+    color: var(--amber);
+}
+
+.case-stack{
+    margin: 0;
+}
+
+.case-link{
+    align-self: flex-start;
+    padding: 0.7rem 1.3rem;
+    border: 1px solid var(--accent);
+    border-radius: 7px;
+    background-color: var(--accent);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--bg);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.case-link:hover{
+    background-color: transparent;
+    color: var(--text);
+}

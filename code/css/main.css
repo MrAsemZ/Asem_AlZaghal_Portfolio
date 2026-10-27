@@ -10,9 +10,11 @@
 @import "components/journey-map.css";
 @import "components/skills-tree.css";
 @import "components/projects.css";
+@import "components/case-study.css";
 @import "components/services.css";
 @import "components/contact.css";
 @import "components/footer.css";
 @import "components/back-to-top.css";
+@import "components/theme-picker.css";
 
 @import "motion.css";
