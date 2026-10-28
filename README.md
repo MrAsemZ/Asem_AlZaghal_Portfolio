@@ -4,42 +4,39 @@
 
 **Live site:** https://mrasemz.github.io/Asem_AlZaghal_Portfolio
 
-My personal portfolio, built with plain HTML, CSS and JavaScript. No frameworks, no build step, no dependencies. Every section starts from one idea: show the work, not just describe it.
+This is my personal portfolio. It is built with plain HTML, CSS and JavaScript, with no frameworks, libraries or build tools, because I wanted the site itself to show what I can do. The repository is public so recruiters and engineers can read the code behind it.
 
-## Highlights
+## What the site does
 
 - **Break the code to enter:** the hero starts as a code editor. Click it and it shatters into 80 shards that fly away from the click point, revealing the real page.
 - **Skill tree:** a game-style tree where a glowing dot walks through the pipes and unlocks each skill, then patrols the tree every few seconds. Branches collapse on click.
 - **Journey map:** clickable pins along a route, built with radio inputs and no JavaScript.
-- **Case studies:** each project card opens a slide-in panel (a native `<dialog>`) with the problem, approach, decisions and result.
-- **Services:** expandable rows built on `<details>`, each linking to a project that proves it.
+- **Case studies:** each project card opens a slide-in panel with the problem, approach, decisions and result.
+- **Services:** expandable rows, each linking to a project that proves it.
 - **Contact:** the email types itself in on scroll, with copy buttons and a résumé download.
-- **Details:** scroll progress line, back-to-top button, five accent colors that are remembered between visits, and a footer comment signature.
-- **Accessible by default:** keyboard navigation, focus styles, semantic HTML and full support for `prefers-reduced-motion`.
-- **Responsive:** designed for phones first, checked from 320px up.
+- **Details:** a scroll progress line, a back-to-top button, and five accent colors that are remembered between visits.
 
-## Tech
+## Skills this project shows
 
-| Layer | What I used |
+| Skill | Where to see it |
 |---|---|
-| Markup | Semantic HTML5, `<dialog>`, `<details>` |
-| Styling | Modular CSS, custom properties (design tokens), `:has()`, `color-mix()`, `@property` |
-| Behavior | Vanilla JavaScript as ES modules |
-| Hosting | GitHub Pages |
+| Modular architecture | CSS split into design tokens, base styles and one file per component. JavaScript split into ES modules, each exposing one `init` function. |
+| Vanilla JavaScript | DOM building, recursion (skill tree), `async/await` (the walking dot), event delegation, `IntersectionObserver`, `ResizeObserver`, `requestAnimationFrame`. |
+| Modern CSS | Custom properties, `:has()`, `color-mix()`, `@property` (smooth theme fade), `clip-path`, grid and flexbox. |
+| Animation | Shatter physics from the click point, SVG path animation with `getPointAtLength`, staggered scroll reveals, CSS-only typewriter. |
+| Accessibility | Semantic HTML, native `<dialog>` and `<details>`, keyboard support, visible focus, and full support for `prefers-reduced-motion`. |
+| Responsive design | Built phone-first and checked on phone, tablet and desktop widths. |
+| Product thinking | Case studies that explain decisions, services backed by real projects, copy buttons, link preview image. |
+| Performance | No dependencies besides Google Fonts, passive scroll listeners, and work throttled to one update per frame. |
 
 ## How it is organized
 
 The rule I followed: **JavaScript decides when, CSS decides how.** JS only adds a class or sets a CSS variable, and CSS does all the animating.
 
 ```
-portfolio/
 ├── index.html
-├── favicon.svg, favicon.ico, apple-touch-icon.png
-├── og-image.png              link preview image (1200 x 630)
-├── docs/
-│   └── Asem_AlZaghal_CV.pdf
-├── design/
-│   └── og-image.html         editable source of the preview image
+├── docs/                     résumé
+├── design/                   source of the link preview image
 └── code/
     ├── css/
     │   ├── main.css          only @imports, in order
@@ -49,41 +46,19 @@ portfolio/
     │   └── components/       one file per section or feature
     └── js/
         ├── main.js           starts every module
-        ├── data/
-        │   └── case-studies.js
+        ├── data/             case study content
         └── modules/          one file per feature
 ```
 
-## Run it locally
+## Usage
 
-The JavaScript uses ES modules, which browsers block when you open `index.html` by double-clicking. Use a local server instead:
+© 2026 A'sem Al-Zaghal. All rights reserved.
 
-- **VS Code:** install the *Live Server* extension, right-click `index.html`, then *Open with Live Server*.
-- **Python:** `python -m http.server 8000`, then open `http://localhost:8000`.
-- **Node:** `npx serve`.
-
-## Make it yours
-
-| To change | Edit |
-|---|---|
-| Case study text | `code/js/data/case-studies.js` |
-| Skills in the tree | the `skillsTree` object in `code/js/modules/skills-tree.js` |
-| Accent colors | the palette at the top of `code/css/tokens.css` |
-| How violent the shatter is | the `FORCE` object in `code/js/modules/shatter.js` |
-| Walking dot speed and patrol delay | the `WALK` object in `code/js/modules/skills-walker.js` |
-| Résumé | replace `docs/Asem_AlZaghal_CV.pdf` |
-
-Adding a new accent color takes three steps: add the color to the palette in `tokens.css`, add one `html[data-accent="..."]` rule below it, and add one swatch button in the footer of `index.html`.
-
-## Browser support
-
-Built for current versions of Chrome, Edge, Firefox and Safari. It uses modern CSS (`:has()`, `color-mix()`, `@property`) and the native `<dialog>` element. Older browsers still show all the content, but some effects may be missing.
-
-## Deploy
-
-The site is a folder of static files, so any static host works. For GitHub Pages: push the folder to a repository, open **Settings → Pages**, choose the `main` branch and the root folder, and save.
+This is a personal portfolio, not a template. The code, design and content are not licensed for copying, redistribution or deployment as your own. You are welcome to browse the live site and read the code to evaluate my work.
 
 ## Contact
+
+I'm open to opportunities and project work.
 
 - Email: alzaghal.asem@gmail.com
 - LinkedIn: https://www.linkedin.com/in/asem-al-zaghal/
